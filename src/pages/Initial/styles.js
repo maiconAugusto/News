@@ -12,7 +12,7 @@ export const Container = styled.View`
 export const Form = styled.View`
   display: flex;
   flex-direction: column;
-  height: 50%;
+  min-height: 40%;
   align-self: stretch;
   background-color: white;
   margin: 15px 20px 20px 20px;

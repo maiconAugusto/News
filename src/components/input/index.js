@@ -26,7 +26,7 @@ const Input = ({
       maxLength={maxLength}
       theme={{
         colors: {
-          primary: '#550073',
+          primary: '#7B7485',
           underlineColor: 'red',
           error: '#FF8686',
         },
