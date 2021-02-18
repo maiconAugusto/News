@@ -10,16 +10,17 @@ const Tab = createMaterialTopTabNavigator();
 
 import Initial from '../pages/Initial';
 import Home from '../pages/home';
+import NewSpaper from '../pages/newSpaper';
 
 const MainTabs = () => (
   <Tab.Navigator
     swipeEnabled={false}
     tabBarOptions={{
       indicatorStyle: {backgroundColor: 'transparent'},
-      activeTintColor: '#FFBE3D',
+      activeTintColor: '#00A0FF',
       inactiveTintColor: 'white',
       showIcon: true,
-      contentContainerStyle: {height: 70, backgroundColor: '#4529FF'},
+      contentContainerStyle: {height: 70, backgroundColor: '#393939'},
     }}
     tabBarPosition="bottom">
     <Tab.Screen
@@ -31,7 +32,7 @@ const MainTabs = () => (
         ),
         tabBarIcon: ({focused, color}) => (
           <Icon
-            name={focused ? 'home' : 'home-outline'}
+            name={focused ? 'newspaper-outline' : 'newspaper'}
             type="ionicon"
             color={color}
             size={25}
@@ -40,33 +41,16 @@ const MainTabs = () => (
       }}
     />
     <Tab.Screen
-      name="MyPosts"
-      component={Initial}
+      name="newSpaper"
+      component={NewSpaper}
       options={{
         title: ({color}) => (
           <Text style={{fontFamily: 'Quicksand-Bold', color}}>Seus posts</Text>
         ),
         tabBarIcon: ({focused, color}) => (
           <Icon
-            name={focused ? 'heart' : 'heart-outline'}
+            name={focused ? 'add-circle-outline' : 'add'}
             type="ionicon"
-            color={color}
-            size={25}
-          />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="Profile"
-      component={Initial}
-      options={{
-        title: ({color}) => (
-          <Text style={{fontFamily: 'Quicksand-Bold', color}}>Perfil</Text>
-        ),
-        tabBarIcon: ({focused, color}) => (
-          <Icon
-            name={focused ? 'user' : 'user-o'}
-            type="font-awesome"
             color={color}
             size={25}
           />
