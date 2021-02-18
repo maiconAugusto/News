@@ -32,6 +32,7 @@ const Initial = ({navigation}) => {
           secureTextEntry={true}
         />
         <Button
+          onPress={() => navigation.navigate('MainTabs')}
           data="Acessar"
           color="white"
           style={{backgroundColor: '#4529FF', margin: 10}}
