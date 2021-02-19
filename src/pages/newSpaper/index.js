@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
 import {Container, View} from './styles';
 import Input from '../../components/input';
 import Text from '../../components/text';
@@ -9,6 +10,7 @@ import Button from '../../components/buttom';
 
 const NewSpaper = ({navigation, route}) => {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [author, setAuthor] = useState('');
@@ -24,6 +26,10 @@ const NewSpaper = ({navigation, route}) => {
       setIsUpdate(true);
     }
   }, []);
+
+  useEffect(() => {
+    setError(false);
+  }, [isFocused]);
 
   function addNewSpaper() {
     if (title === '' || text === '' || author === '') {
