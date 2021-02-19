@@ -46,6 +46,7 @@ const Home = ({navigation}) => {
         <FlatList
           data={newSpapers}
           extraData={newSpapers}
+          keyExtractor={(item, index) => index.toString()}
           inverted
           renderItem={({item, index}) => {
             return (
