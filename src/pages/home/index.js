@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, {useState, useEffect} from 'react';
-import {Pressable} from 'react-native';
+import {Pressable, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Searchbar} from 'react-native-paper';
 import Fuse from 'fuse.js';
@@ -13,12 +13,10 @@ const options = {
 
 const Home = ({navigation}) => {
   const [newSpapers, setNewSpapers] = useState(
-    useSelector((state) => state.news.news.reverse()),
+    useSelector((state) => state.news.news),
   );
 
-  const [newSpapersCopy] = useState(
-    useSelector((state) => state.news.news.reverse()),
-  );
+  const [newSpapersCopy] = useState(useSelector((state) => state.news.news));
 
   function Filter(name) {
     if (name === '') {
@@ -45,43 +43,48 @@ const Home = ({navigation}) => {
         />
       </Header>
       <Body>
-        {newSpapers.map((item, index) => {
-          return (
-            <Pressable
-              key={item.id}
-              onPress={() =>
-                navigation.navigate('Visualizar notícia', {
-                  title: item.title,
-                  author: item.author,
-                  text: item.text,
-                  id: item.id,
-                })
-              }>
-              <Card key={index}>
-                <Text
-                  data={item.title}
-                  styles={{
-                    marginBottom: 12,
-                    fontSize: 18,
-                    fontFamily: 'Quicksand-Bold',
-                  }}
-                />
-                <Text
-                  data={item.text}
-                  styles={{
-                    fontSize: 17,
-                    color: '#454545',
-                    fontFamily: 'Quicksand-Light',
-                  }}
-                />
-                <Text
-                  data={`Por ${item.author}, Portal de notícias.`}
-                  styles={{marginTop: 14, fontSize: 15, color: '#393939'}}
-                />
-              </Card>
-            </Pressable>
-          );
-        })}
+        <FlatList
+          data={newSpapers}
+          extraData={newSpapers}
+          inverted
+          renderItem={({item, index}) => {
+            return (
+              <Pressable
+                key={index}
+                onPress={() =>
+                  navigation.navigate('Visualizar notícia', {
+                    title: item.title,
+                    author: item.author,
+                    text: item.text,
+                    id: item.id,
+                  })
+                }>
+                <Card key={index}>
+                  <Text
+                    data={item.title}
+                    styles={{
+                      marginBottom: 12,
+                      fontSize: 18,
+                      fontFamily: 'Quicksand-Bold',
+                    }}
+                  />
+                  <Text
+                    data={item.text}
+                    styles={{
+                      fontSize: 17,
+                      color: '#454545',
+                      fontFamily: 'Quicksand-Light',
+                    }}
+                  />
+                  <Text
+                    data={`Por ${item.author}, Portal de notícias.`}
+                    styles={{marginTop: 14, fontSize: 15, color: '#393939'}}
+                  />
+                </Card>
+              </Pressable>
+            );
+          }}
+        />
       </Body>
     </Container>
   );
