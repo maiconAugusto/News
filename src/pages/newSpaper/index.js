@@ -1,18 +1,30 @@
-import React, {useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useEffect} from 'react';
 import {Container, View} from './styles';
 import Input from '../../components/input';
 import Text from '../../components/text';
 import Button from '../../components/buttom';
 
 const NewSpaper = ({navigation, route}) => {
-  const [title, setTitle] = useState(route === undefined ? '' : route.title);
-  const [text, setText] = useState(route === undefined ? '' : route.text);
-  const [author, setAuthor] = useState(route === undefined ? '' : route.author);
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+  const [author, setAuthor] = useState('');
+  const [isUpdate, setIsUpdate] = useState(false);
+
+  useEffect(() => {
+    if (route.params !== undefined) {
+      setTitle(route.params.title);
+      setText(route.params.text);
+      setAuthor(route.params.author);
+      setIsUpdate(true);
+    }
+  }, []);
+
   return (
     <Container>
       <View>
         <Text
-          data={route.isUpdate ? 'Atualizar notícia' : 'Criar nova notícia'}
+          data={isUpdate ? 'Atualizar notícia' : 'Criar nova notícia'}
           styles={{fontSize: 18, fontFamily: 'Quicksand-Bold'}}
         />
       </View>
@@ -47,7 +59,7 @@ const NewSpaper = ({navigation, route}) => {
         autoFocus={true}
       />
       <Button
-        data="Publicar"
+        data={isUpdate ? 'Atualizar' : 'Publicar'}
         color="white"
         style={{
           backgroundColor: 'green',

@@ -11,6 +11,7 @@ const Tab = createMaterialTopTabNavigator();
 import Initial from '../pages/Initial';
 import Home from '../pages/home';
 import NewSpaper from '../pages/newSpaper';
+import News from '../pages/new';
 
 const MainTabs = () => (
   <Tab.Navigator
@@ -72,6 +73,16 @@ const App = () => {
         <Stack.Screen
           name="MainTabs"
           component={MainTabs}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="new"
+          component={News}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EditNewSpaper"
+          component={NewSpaper}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
