@@ -35,10 +35,10 @@ const MainTabs = () => (
     swipeEnabled={false}
     tabBarOptions={{
       indicatorStyle: {backgroundColor: 'transparent'},
-      activeTintColor: '#00A0FF',
-      inactiveTintColor: 'white',
+      activeTintColor: 'white',
+      inactiveTintColor: '#2C2C2C',
       showIcon: true,
-      contentContainerStyle: {height: 70, backgroundColor: '#393939'},
+      contentContainerStyle: {height: 70, backgroundColor: '#7B64FF'},
     }}
     tabBarPosition="bottom">
     <Tab.Screen

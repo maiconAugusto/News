@@ -6,7 +6,7 @@ export const Container = styled.View`
   justify-content: center;
   flex: 1;
   height: 100%;
-  background-color: #393939;
+  background-color: #7b64ff;
   align-items: center;
 `;
 export const Form = styled.View`
