@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Pressable} from 'react-native';
+import {useSelector} from 'react-redux';
 import {Searchbar} from 'react-native-paper';
 import Fuse from 'fuse.js';
 import {Container, Header, Body, Card} from './styles';
@@ -34,7 +35,9 @@ const options = {
 };
 
 const Home = ({navigation}) => {
-  const [newSpapers, setNewSpapers] = useState([]);
+  const [newSpapers, setNewSpapers] = useState(
+    useSelector((state) => state.news.news),
+  );
 
   useEffect(() => {
     setNewSpapers(data);
