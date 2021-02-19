@@ -28,7 +28,7 @@ const NewSpaper = ({navigation, route}) => {
   function addNewSpaper() {
     if (title === '' || text === '' || author === '') {
       setError(true);
-      return Alert.alert('', 'Preencha todos os campos!');
+      return Alert.alert('Atenção', 'Preencha todos os campos!');
     } else {
       const id = Math.floor(Math.random() * 100);
       data.push({title, text, author, id});
@@ -38,6 +38,34 @@ const NewSpaper = ({navigation, route}) => {
       setAuthor('');
       setError(false);
       navigation.reset({index: 0, routes: [{name: 'MainTabs'}]});
+      Alert.alert('Parabéns', 'Notícia adicionada com sucesso!');
+    }
+  }
+
+  function updateNewSpaper() {
+    if (title === '' || text === '' || author === '') {
+      setError(true);
+      return Alert.alert('Atenção', 'Preencha todos os campos!');
+    } else {
+      const updateInfo = {
+        title,
+        text,
+        author,
+      };
+      const newData = data.map((item) => {
+        if (item.id === route.params.id) {
+          item = updateInfo;
+          return item;
+        }
+        return item;
+      });
+      dispatch({type: 'update', payload: newData});
+      setTitle('');
+      setText('');
+      setAuthor('');
+      setError(false);
+      navigation.reset({index: 0, routes: [{name: 'MainTabs'}]});
+      Alert.alert('Parabéns', 'Notícia atualizada com sucesso!');
     }
   }
 
@@ -90,7 +118,7 @@ const NewSpaper = ({navigation, route}) => {
           marginLeft: 10,
           marginRight: 10,
         }}
-        onPress={() => addNewSpaper()}
+        onPress={() => (isUpdate ? updateNewSpaper() : addNewSpaper())}
       />
     </Container>
   );

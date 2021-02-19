@@ -1,10 +1,20 @@
 import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {Icon} from 'react-native-elements';
 import {Container, Card, View} from './styles';
 import Text from '../../components/text';
+import {Alert} from 'react-native';
 
 const NewComponent = ({navigation, route}) => {
   const {title, author, id, text} = route.params;
+  const data = useSelector((state) => state.news.news);
+  const dispatch = useDispatch();
+
+  function removeItem() {
+    dispatch({type: 'remove', payload: data.filter((item) => item.id !== id)});
+    navigation.reset({index: 0, routes: [{name: 'MainTabs'}]});
+    Alert.alert('Parabéns', 'Notícia removida com sucesso!');
+  }
   return (
     <Container>
       <View style={{marginTop: 30}}>
@@ -42,6 +52,7 @@ const NewComponent = ({navigation, route}) => {
           name="trash-outline"
           type="ionicon"
           color="red"
+          onPress={() => removeItem()}
         />
         <Icon
           raised

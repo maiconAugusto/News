@@ -29,7 +29,7 @@ const Input = ({
         colors: {
           primary: '#7B7485',
           underlineColor: 'red',
-          error: '#FF8686',
+          error: 'red',
         },
       }}
       error={error}
