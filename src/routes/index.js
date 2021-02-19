@@ -13,6 +13,23 @@ import Home from '../pages/home';
 import NewSpaper from '../pages/newSpaper';
 import News from '../pages/new';
 
+const headerStyle = {
+  headerShown: true,
+  headerBackTitleVisible: false,
+  headerTintColor: 'black',
+  headerStyle: {
+    height: 60,
+    elevation: 0,
+    shadowOpacity: 0,
+    backgroundColor: 'white',
+  },
+  headerTitleStyle: {
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'HelveticaNeue-Medium',
+  },
+};
+
 const MainTabs = () => (
   <Tab.Navigator
     swipeEnabled={false}
@@ -76,14 +93,14 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="new"
+          name="Visualizar notícia"
           component={News}
-          options={{headerShown: false}}
+          options={headerStyle}
         />
         <Stack.Screen
-          name="EditNewSpaper"
+          name="Editar notícia"
           component={NewSpaper}
-          options={{headerShown: false}}
+          options={headerStyle}
         />
       </Stack.Navigator>
     </NavigationContainer>

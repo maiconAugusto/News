@@ -35,7 +35,7 @@ const Initial = ({navigation}) => {
           onPress={() => navigation.navigate('MainTabs')}
           data="Acessar"
           color="white"
-          style={{backgroundColor: '#4529FF', margin: 10}}
+          style={{backgroundColor: '#393939', margin: 10}}
         />
       </Form>
     </Container>

@@ -18,9 +18,14 @@ export const Card = styled.View.attrs({
   elevation: 1,
 })`
   display: flex;
-  margin: 10px;
+  margin: 30px 10px 10px 10px;
   padding: 10px;
   min-height: 50px;
   background-color: white;
   border-radius: 4px;
+`;
+export const View = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;

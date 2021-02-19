@@ -69,7 +69,7 @@ const Home = ({navigation}) => {
           return (
             <Pressable
               onPress={() =>
-                navigation.navigate('new', {
+                navigation.navigate('Visualizar notícia', {
                   title: item.title,
                   author: item.author,
                   text: item.text,
