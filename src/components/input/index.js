@@ -16,6 +16,7 @@ const Input = ({
   autoFocus,
   autoCapitalize,
   secureTextEntry,
+  error,
 }) => {
   return (
     <TextInput
@@ -31,6 +32,7 @@ const Input = ({
           error: '#FF8686',
         },
       }}
+      error={error}
       mode={mode}
       style={style}
       autoCapitalize={

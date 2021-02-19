@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, {useState, useEffect} from 'react';
 import {Pressable} from 'react-native';
 import {useSelector} from 'react-redux';
@@ -6,48 +7,24 @@ import Fuse from 'fuse.js';
 import {Container, Header, Body, Card} from './styles';
 import Text from '../../components/text';
 
-const data = [
-  {
-    id: 0,
-    title: 'Covid-19',
-    text:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    author: 'Gil',
-  },
-  {
-    id: 1,
-    title: 'Covid-19',
-    text:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    author: 'Carlos Roupa Nova',
-  },
-  {
-    id: 2,
-    title: 'Covid-19',
-    text:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    author: 'Jean Dornelas',
-  },
-];
-
 const options = {
   keys: ['title', 'author', 'text'],
 };
 
 const Home = ({navigation}) => {
   const [newSpapers, setNewSpapers] = useState(
-    useSelector((state) => state.news.news),
+    useSelector((state) => state.news.news.reverse()),
   );
 
-  useEffect(() => {
-    setNewSpapers(data);
-  }, []);
+  const [newSpapersCopy] = useState(
+    useSelector((state) => state.news.news.reverse()),
+  );
 
   function Filter(name) {
     if (name === '') {
-      setNewSpapers(data);
+      setNewSpapers(newSpapersCopy);
     } else {
-      const fuse = new Fuse(data, options);
+      const fuse = new Fuse(newSpapers, options);
       const dataFiltered = [];
       const response = fuse.search(name);
 

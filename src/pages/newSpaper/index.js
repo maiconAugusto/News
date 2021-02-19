@@ -1,15 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
+import {Alert} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {Container, View} from './styles';
 import Input from '../../components/input';
 import Text from '../../components/text';
 import Button from '../../components/buttom';
 
 const NewSpaper = ({navigation, route}) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [author, setAuthor] = useState('');
   const [isUpdate, setIsUpdate] = useState(false);
+  const data = useSelector((state) => state.news.news);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (route.params !== undefined) {
@@ -19,6 +24,22 @@ const NewSpaper = ({navigation, route}) => {
       setIsUpdate(true);
     }
   }, []);
+
+  function addNewSpaper() {
+    if (title === '' || text === '' || author === '') {
+      setError(true);
+      return Alert.alert('', 'Preencha todos os campos!');
+    } else {
+      const id = Math.floor(Math.random() * 100);
+      data.push({title, text, author, id});
+      dispatch({type: 'add', payload: data});
+      setTitle('');
+      setText('');
+      setAuthor('');
+      setError(false);
+      navigation.reset({index: 0, routes: [{name: 'MainTabs'}]});
+    }
+  }
 
   return (
     <Container>
@@ -34,6 +55,7 @@ const NewSpaper = ({navigation, route}) => {
         numberOfLines={1}
         style={{margin: 10}}
         maxLength={100}
+        error={error}
         label="Titulo"
         returnKeyType="done"
         autoFocus={true}
@@ -46,17 +68,18 @@ const NewSpaper = ({navigation, route}) => {
         returnKeyType="default"
         numberOfLines={4}
         multiline={true}
+        error={error}
         style={{height: 200, margin: 10, color: '#2A2A2A'}}
       />
       <Input
         value={author}
-        setAuthor={setAuthor}
         numberOfLines={1}
+        setValue={setAuthor}
         style={{margin: 10}}
         maxLength={100}
+        error={error}
         label="Autor"
         returnKeyType="done"
-        autoFocus={true}
       />
       <Button
         data={isUpdate ? 'Atualizar' : 'Publicar'}
@@ -67,6 +90,7 @@ const NewSpaper = ({navigation, route}) => {
           marginLeft: 10,
           marginRight: 10,
         }}
+        onPress={() => addNewSpaper()}
       />
     </Container>
   );

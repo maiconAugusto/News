@@ -27,7 +27,7 @@ export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'add': {
       const newState = {...state, action};
-      newState.news = newState.news.push(action.payload);
+      newState.news = action.payload;
       return newState;
     }
     case 'remove': {
