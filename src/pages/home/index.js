@@ -48,6 +48,7 @@ const Home = ({navigation}) => {
         {newSpapers.map((item, index) => {
           return (
             <Pressable
+              key={item.id}
               onPress={() =>
                 navigation.navigate('Visualizar notícia', {
                   title: item.title,

@@ -7,6 +7,10 @@ import Text from '../../components/text';
 const Initial = ({navigation}) => {
   const [email, setEmail] = useState('admin@.com.br');
   const [password, setPassword] = useState('123456');
+
+  function Login() {
+    navigation.reset({index: 0, routes: [{name: 'MainTabs'}]});
+  }
   return (
     <Container>
       <Text
@@ -32,7 +36,7 @@ const Initial = ({navigation}) => {
           secureTextEntry={true}
         />
         <Button
-          onPress={() => navigation.navigate('MainTabs')}
+          onPress={() => Login()}
           data="Acessar"
           color="white"
           style={{backgroundColor: 'green', margin: 10}}
