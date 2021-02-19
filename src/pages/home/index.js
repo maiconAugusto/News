@@ -47,7 +47,6 @@ const Home = ({navigation}) => {
           data={newSpapers}
           extraData={newSpapers}
           keyExtractor={(item, index) => index.toString()}
-          inverted
           renderItem={({item, index}) => {
             return (
               <Pressable
