@@ -5,6 +5,7 @@
   - Redux.
   - Styled component.
   - React-navigation.
+  - React-native-paper
 
 ### Run App!
 
